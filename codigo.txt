@@ -1,0 +1,62 @@
+        else if (Input.touchCount > 1)
+        {
+            float[] arrx = new float[2];
+            float[] arry = new float[2];
+            big = 1.05f;
+            small = 0.95f;
+            normal = 1f;
+
+            theTouch0 = Input.GetTouch(0);
+            theTouch1 = Input.GetTouch(1);
+
+            if (theTouch0.phase == TouchPhase.Began && theTouch1.phase == TouchPhase.Began)
+            {
+                touchPos00 = Input.GetTouch(0).position;
+                touchPos11 = Input.GetTouch(1).position;
+
+                xs0 = Mathf.Abs(touchPos00.x - touchPos11.x);
+                ys0 = Mathf.Abs(touchPos00.y - touchPos11.y);
+            }
+            else if (theTouch.phase == TouchPhase.Moved || theTouch.phase == TouchPhase.Ended)
+            {
+                touchPos0 = Input.GetTouch(0).position;
+                touchPos1 = Input.GetTouch(1).position;
+
+
+                xs1 = Mathf.Abs(touchPos0.x - touchPos1.x);
+                ys1 = Mathf.Abs(touchPos0.y - touchPos1.y);
+
+
+                arrx[0] = xs0;
+                arry[0] = ys0;
+
+                arrx[1] = xs1;
+                arry[1] = ys1;
+
+                if (arrx[0] == arrx[1] || arry[0] == arry[1])
+                {
+                    Vector3 changerscale = new Vector3(normal, normal, normal);
+                    topoc.transform.localScale *= normal;
+                }
+
+
+                else if (arrx[0] > arrx[1] || arry[0] > arry[1])
+                {
+                    Vector3 changerscale = new Vector3(small, small, small);
+                    topoc.transform.localScale *= small;
+                }
+
+                else if (arrx[0] < arrx[1] || arry[0] < arry[1])
+                {
+                    Vector3 changerscale = new Vector3(big, big, big);
+                    topoc.transform.localScale *= big;
+                }
+
+
+            }
+                Debug.Log(xs0);
+                Debug.Log("arr");
+                Debug.Log(arrx[0]);
+
+           
+        }
